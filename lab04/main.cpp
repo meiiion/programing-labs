@@ -102,5 +102,6 @@ int main() {
 	char* numArrayPtr = new char[count];
 	ToArray(numArrayPtr, number, count);
 	PrintNum(numArrayPtr, count);
+	delete[] numArrayPtr;
 	return 0;
 }
