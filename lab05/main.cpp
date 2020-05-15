@@ -6,13 +6,6 @@
 using namespace std;
 
 
-
-size_t strlen(char* line) {
-	size_t count = 0;
-	while (line[count]) count++;
-	return count;
-}
-
 char* getarray(size_t *size) {
 	int c = 0;
 	*size = 0;
