@@ -1,5 +1,4 @@
 //Not Finished!!!!!!!!!
-
 #include <iostream>
 #include <string>
 #define BUFFER_LIMIT 150
@@ -28,6 +27,18 @@ char* getarray(size_t *size) {
 			line[*size - 1] = c;
 		}
 	}
+	if (*size < buffer) line[*size] = '\0';
+	else
+	{
+		char* ptr = (char*)realloc(line, buffer += 1);
+		if (ptr == nullptr)
+		{
+			free(line);
+			return nullptr;
+		}
+		line = ptr;
+		line[*size] = '\0';
+	}
 	line[*size] = '\0';
 	return line;
 }
@@ -35,8 +46,7 @@ char* getarray(size_t *size) {
 int main() {
 	size_t size = 0;
 	char* p = getarray(&size);
-	printf(p);
-	
+	printf("%s, %d", p, size);
 	
 	return 0;
 }
