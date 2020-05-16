@@ -79,3 +79,18 @@ char* getarray(size_t* size) {
 	line[*size] = '\0';
 	return line;
 }
+
+void printwords(char *firstword, char *secondword, size_t *x, size_t *y)
+{
+	for (size_t i = 0; firstword[i] != '\0'; i++)
+	{
+		for (size_t j = 0; secondword[j] != '\0'; j++)
+		{
+			//if ((i == *y) && (j == *x)) putchar(firstword[i]);
+			if (i == *y) putchar(firstword[j]); else
+				if (j == *x) putchar(secondword[i]); else
+					putchar(' ');
+		}
+		putchar('\n');
+	}
+}
