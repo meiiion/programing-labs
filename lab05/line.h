@@ -7,3 +7,6 @@ char* getarray();
 // Перегрузка getarray(), действует так же, 
 // помещает в переменную указанную в качестве аргумента длину строки без учета '\0'
 char* getarray(size_t *size);
+
+// Печатает кроссворд, при указанном месте пересечения слов
+void printwords(char* firstword, char* secondword, size_t* x, size_t* y);
