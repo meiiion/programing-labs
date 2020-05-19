@@ -1,12 +1,11 @@
 #include <iostream>
-using namespace std;
 
 struct ItemInfo
 {
     char title[30];
     char manufacturer[150];
     double price;
-    int quantity;
+    unsigned int quantity;
 };
 
 enum class mainMenu
@@ -64,26 +63,26 @@ void SetData(ItemInfo *Obj, const size_t amount)
 {
     printf(" Title: ");
     scanf_s("%s", Obj[amount].title, _countof(Obj[amount].title));
-	
+    
     printf(" Manufacturer: ");
     scanf_s("%s", Obj[amount].manufacturer, _countof(Obj[amount].manufacturer));
-	
+    
     printf(" Price: ");
     scanf_s("%lf", &Obj[amount].price);
-	
+    
     printf(" Quantity: ");
-    scanf_s("%d", &Obj[amount].quantity);
+    scanf_s("%u", &Obj[amount].quantity);
 }
 
 void PrintMainMenu()
 {
     printf(
-        " --------------------\n"
+        " -------------------\n"
         " | View items  (%d) |\n"
         " | Add item    (%d) |\n"
         " | Remove item (%d) |\n"
         " | Exit        (%d) |\n"
-        " --------------------\n",
+        " -------------------\n",
         mainMenu::VIEW, mainMenu::ADD, mainMenu::REMOVE, mainMenu::EXIT
         );
 }
@@ -107,7 +106,7 @@ void PrintItems(ItemInfo* Obj, size_t amount)
     {
         for (size_t i = 0; i < amount; i++)
         {
-            printf(" --\n"
+            printf(" ----\n"
                     " | Index:        %d\n"
                     " | Title:        %s\n"
                     " | Manufacturer: %s\n"
@@ -119,7 +118,7 @@ void PrintItems(ItemInfo* Obj, size_t amount)
                         Obj->price, 
                         Obj->quantity);
         }
-        printf(" --\n");
+        printf(" ----\n");
     }
 }
 
@@ -174,7 +173,7 @@ int main()
             case mainMenu::ADD:
                 items = AddItem(items, ItemAmount);
                 SetData(items, ItemAmount);
-        		ItemAmount++;
+                ItemAmount++;
                 break;
 
             case mainMenu::REMOVE:
