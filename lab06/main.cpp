@@ -135,12 +135,24 @@ void Swap(ItemInfo* Obj, const size_t x, const size_t y)
 
 void SortByTitle(ItemInfo* Obj, const size_t amount)
 {
-
+    for (size_t i = 0; i < amount - 1; i++)
+    {
+        for (size_t j = i + 1; j < amount; j++)
+        {
+            if (std::strcmp(Obj[i].title, Obj[j].title) > 0) Swap(Obj, i, j);
+        }
+    }
 }
 
 void SortByManufacturer(ItemInfo* Obj, const size_t amount)
 {
-    
+    for (size_t i = 0; i < amount - 1; i++)
+    {
+        for (size_t j = i + 1; j < amount; j++)
+        {
+            if (std::strcmp(Obj[i].manufacturer, Obj[j].manufacturer) > 0) Swap(Obj, i, j);
+        }
+    }
 }
 
 void SortByPrice(ItemInfo* Obj, const size_t amount)
@@ -200,6 +212,7 @@ int main()
                         break;
 
                     case sortMenu::MANUFACTURER:
+                        SortByManufacturer(Items, ItemsAmount);
                         break;
 
                     case sortMenu::PRICE:
