@@ -35,5 +35,5 @@ void       SortByTitle        ( ItemInfo* Obj, const size_t  amount             
 void       SortByManufacturer ( ItemInfo* Obj, const size_t  amount                       );
 void       SortByPrice        ( ItemInfo* Obj, const size_t  amount                       );
 void       SortByQuantity     ( ItemInfo* Obj, const size_t  amount                       );
-void       SaveToFile         ( ItemInfo* Obj, const size_t  amount                       );
+void       SaveToFile         ( ItemInfo* Obj, const size_t  amount, const char* filename );
 ItemInfo*  LoadFromFile       (                      size_t* amount, const char* filename );
