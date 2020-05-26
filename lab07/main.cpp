@@ -1,12 +1,12 @@
 #include <iostream>
 #include "core.h"
-
+const char path[] = "C:\\items.data";
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
     size_t ItemsAmount = 0;
-    ItemInfo* Items = LoadFromFile(&ItemsAmount, "C:\\items.data");
+    ItemInfo* Items = LoadFromFile(&ItemsAmount, path);
     bool stop_main = false;
     while (!stop_main)
     {
@@ -107,8 +107,7 @@ int main()
             stop_main = true;
             break;
         }
-        SaveToFile(Items, ItemsAmount);
+        SaveToFile(Items, ItemsAmount, path);
     }
     return 0;
 }
-
