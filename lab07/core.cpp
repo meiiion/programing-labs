@@ -159,15 +159,15 @@ void SortByQuantity(ItemInfo* Obj, const size_t amount)
         }
     }
 }
-void SaveToFile(ItemInfo* Obj, const size_t amount) {
-    if (amount > 0) {
-        ofstream fout("C:\\items.data", ios::trunc | ios::binary);
-        fout << (int)amount << endl;
+void SaveToFile(ItemInfo* Obj, const size_t amount, const char* filename) {
+    ofstream fout(filename, ios::trunc | ios::binary);
+    fout << amount << endl;
+    if (amount > 0)
         for (size_t i = 0; i < amount; i++) {
             fout << Obj[i].title << "\n" << Obj[i].manufacturer << "\n" << Obj[i].price << "\n" << Obj[i].quantity << endl;
         }
-        fout.close();
-    }
+    fout.close();
+
 }
 ItemInfo* LoadFromFile(size_t* amount, const char* filename) {
     ifstream fin(filename);
