@@ -1,16 +1,23 @@
 #include <iostream>
 #include "core.h"
-const char path[] = "C:\\items.data";
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    size_t ItemsAmount = 0;
-    ItemInfo* Items = LoadFromFile(&ItemsAmount, path);
+    char path[128] = "C:\\items.dat";
+    if (argc == 2) {
+        size_t i = 0;
+        for (; i<128 && argv[1][i] != '\0'; i++)
+        {
+            path[i] = argv[1][i];
+        }
+        path[i] = '\0';
+    }
     bool stop_main = false;
     while (!stop_main)
     {
         system("cls");
+        size_t ItemsAmount = getAmount(path);
         PrintMainMenu(ItemsAmount);
         size_t index = 0;
         cout << " Option: ";
@@ -31,7 +38,7 @@ int main(int argc, char *argv[])
                 while (!stop_sort)
                 {
                     system("cls");
-                    PrintItems(Items, ItemsAmount);
+                    PrintItems(path);
                     PrintSortMenu(ItemsAmount);
                     cout << " Option: ";
                     int sort_opt = 0;
@@ -46,18 +53,18 @@ int main(int argc, char *argv[])
                     switch (sort_menu)
                     {
                     case sortMenu::TITLE:
-                        SortByTitle(Items, ItemsAmount);
+                        SortByTitle(path);
                         break;
 
                     case sortMenu::MANUFACTURER:
-                        SortByManufacturer(Items, ItemsAmount);
+                        SortByManufacturer(path);
                         break;
 
                     case sortMenu::PRICE:
-                        SortByPrice(Items, ItemsAmount);
+                        SortByPrice(path);
                         break;
                     case sortMenu::QUANTITY:
-                        SortByQuantity(Items, ItemsAmount);
+                        SortByQuantity(path);
                         break;
 
                     case sortMenu::BACK:
@@ -82,32 +89,28 @@ int main(int argc, char *argv[])
             cout << " Index: ";
             cin >> index;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            if (index < 0 || index > ItemsAmount) cout << " Encorrect index" << endl;
+            if (index < 0 || index >= ItemsAmount) cout << " Encorrect index" << endl;
             else {
-                PrintItem(Items, index, ItemsAmount);
+                PrintItem(path, index);
             }
             system("pause");
             break;
         case mainMenu::ADD:
             cout << "\n---------------------\n Data for new item\n---------------------" << endl;
-            Items = AddItem(Items, ItemsAmount);
-            SetData(Items, ItemsAmount);
-            ItemsAmount++;
+            AddItem(path);
             break;
 
         case mainMenu::REMOVE:
             cout << " Item index: ";
             cin >> index;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            Items = RemoveItem(Items, ItemsAmount, index);
-            ItemsAmount--;
+            RemoveItem(path, index);
             break;
 
         case mainMenu::EXIT:
             stop_main = true;
             break;
         }
-        SaveToFile(Items, ItemsAmount, path);
     }
     return 0;
 }
