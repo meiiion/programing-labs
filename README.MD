@@ -5,3 +5,4 @@
 * [Лабораторная работа 4](https://github.com/meiiion/programing-labs/blob/master/lab04/main.cpp)
 * [Лабораторная работа 5](https://github.com/meiiion/programing-labs/blob/master/lab05/main.cpp)
 * [Лабораторная работа 6](https://github.com/meiiion/programing-labs/blob/master/lab06/main.cpp)
+* [Лабораторная работа 7](https://github.com/meiiion/programing-labs/blob/master/lab07/main.cpp)
