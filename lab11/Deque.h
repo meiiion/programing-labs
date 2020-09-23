@@ -4,6 +4,7 @@ class Deque {
 
 private:
 	int* queue;
+	int size;
 	int count;
 
 public:
