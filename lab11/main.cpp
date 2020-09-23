@@ -1,7 +1,7 @@
 /*
  *  Лабораторная работа #1
  *  Учаев Григорий, СББ-901-О-01, 2 пг.
- *  Вариант 19
+ *	Вариант 19
  */
 #include <iostream>
 #include "Deque.h"
@@ -39,7 +39,7 @@ void PrintElements(Deque& d) {
 int main() {
 	setlocale(LC_ALL, "Russian");
 	Menu menu = default_option; // init by default value
-	Deque deque = Deque(50);
+	Deque *deque = new Deque(5);
 	
 	while (menu != Menu::exit) {
 		PrintMenu();
@@ -52,11 +52,11 @@ int main() {
 		case Menu::pushBack:
 			printf("\n [#]  Введите число  [#]\n >>> ");
 			scanf_s("%d", &number);
-			deque.PushBack(number);
+			if (deque->PushBack(number) == -1) printf("\n [#]  Переполнение  [#]\n");
 			break;
 		case Menu::popFront:
-			if (!deque.IsEmpty()) {
-			number = deque.PopFront();
+			if (!deque->IsEmpty()) {
+			number = deque->PopFront();
 			printf("\n [#]  Число <%d> извлечено из начала очереди  [#] \n", number);
 			} else {
 				printf("\n [#]  Очередь пуста  [#] \n");
@@ -65,34 +65,34 @@ int main() {
 		case Menu::pushFront:
 			printf("\n [#]  Введите число  [#]\n >>> ");
 			scanf_s("%d", &number);
-			deque.PushFront(number);
+			if (deque->PushFront(number) == -1) printf("\n [#]  Переполнение  [#]\n");
 			break;
 		case Menu::popBack:
-			if (!deque.IsEmpty()) {
-				number = deque.PopBack();
+			if (!deque->IsEmpty()) {
+				number = deque->PopBack();
 				printf("\n [#]  Число <%d> извлечено из конца очереди  [#] \n", number);
 			} else {
 				printf("\n [#]  Очередь пуста  [#] \n");
 			}
 			break;
 		case Menu::isEmpty:
-			if (deque.IsEmpty())
+			if (deque->IsEmpty())
 				printf("\n [#]  Очередь пуста  [#] \n");
 			else
 				printf("\n [#]  Очередь не пуста  [#] \n");
 			break;
 		case Menu::printQueue:
-			if (!deque.IsEmpty()) {
+			if (!deque->IsEmpty()) {
 				printf("\n [#]  Элементы очереди  [#] \n");
-				PrintElements(deque);
+				PrintElements(*deque);
 			}
 			else {
 				printf("\n [#]  Очередь пуста  [#] \n");
 			}
 			break;
 		case Menu::Clear:
-			if (!deque.IsEmpty()) {
-				deque.Clear();
+			if (!deque->IsEmpty()) {
+				deque->Clear();
 				printf("\n\n [#]  Очередь очищена  [#]\n");
 			} else {
 				printf("\n [#]  Очередь пуста  [#] \n");
@@ -101,5 +101,6 @@ int main() {
 		}
 		
 	}
+	delete deque;
 	return 0;
 }
