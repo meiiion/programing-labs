@@ -1,5 +1,6 @@
 #include "Deque.h"
-const int default_size = 3;
+const int default_size = 16;
+const int max_size = 256;
 
 Deque::Deque() {
 	size = default_size;
@@ -8,8 +9,11 @@ Deque::Deque() {
 }
 
 Deque::Deque(int size) {
-	this->size = size;
-	queue = new int[size]();
+	if (size > max_size)
+		this->size = default_size;
+	else
+		this->size = size;
+	queue = new int[this->size];
 	count = 0;
 }
 
@@ -18,7 +22,7 @@ Deque::~Deque() {
 }
 
 int Deque::PushFront(int _num) {
-	if (count > size)
+	if (count >= size)
 		return -1;
 
 	queue[count++] = _num;
@@ -26,7 +30,7 @@ int Deque::PushFront(int _num) {
 }
 
 int Deque::PushBack(int _num) {
-	if (count > size)
+	if (count >= size)
 		return -1;
 	for (int i = count; i > 0; i--)
 		queue[i] = queue[i - 1];
