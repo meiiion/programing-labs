@@ -39,7 +39,7 @@ void PrintElements(Deque& d) {
 int main() {
 	setlocale(LC_ALL, "Russian");
 	Menu menu = default_option; // init by default value
-	Deque *deque = new Deque(5);
+	Deque *deque = new Deque(50);
 	
 	while (menu != Menu::exit) {
 		PrintMenu();
@@ -52,8 +52,9 @@ int main() {
 		case Menu::pushBack:
 			printf("\n [#]  Введите число  [#]\n >>> ");
 			scanf_s("%d", &number);
-			if (deque->PushBack(number) == -1) printf("\n [#]  Переполнение  [#]\n");
+			if (deque->PushBack(number) == -1) printf("\n [!]  Очередь переполнена  [!]\n");
 			break;
+
 		case Menu::popFront:
 			if (!deque->IsEmpty()) {
 			number = deque->PopFront();
@@ -62,11 +63,13 @@ int main() {
 				printf("\n [#]  Очередь пуста  [#] \n");
 			}
 			break;
+
 		case Menu::pushFront:
 			printf("\n [#]  Введите число  [#]\n >>> ");
 			scanf_s("%d", &number);
-			if (deque->PushFront(number) == -1) printf("\n [#]  Переполнение  [#]\n");
+			if (deque->PushFront(number) == -1) printf("\n [!]  Очередь переполнена  [!]\n");
 			break;
+
 		case Menu::popBack:
 			if (!deque->IsEmpty()) {
 				number = deque->PopBack();
@@ -75,12 +78,14 @@ int main() {
 				printf("\n [#]  Очередь пуста  [#] \n");
 			}
 			break;
+
 		case Menu::isEmpty:
 			if (deque->IsEmpty())
 				printf("\n [#]  Очередь пуста  [#] \n");
 			else
 				printf("\n [#]  Очередь не пуста  [#] \n");
 			break;
+
 		case Menu::printQueue:
 			if (!deque->IsEmpty()) {
 				printf("\n [#]  Элементы очереди  [#] \n");
@@ -90,6 +95,7 @@ int main() {
 				printf("\n [#]  Очередь пуста  [#] \n");
 			}
 			break;
+
 		case Menu::Clear:
 			if (!deque->IsEmpty()) {
 				deque->Clear();
